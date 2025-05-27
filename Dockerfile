@@ -1,7 +1,7 @@
 # Usar una imagen base de Maven más reciente
 FROM maven:3.8.3-jdk-11-slim as builder
 
-# Configurar las variables de entorno para Maven
+# Establecer las variables de entorno para Maven
 ENV MAVEN_HOME /usr/share/maven
 ENV M2_HOME /usr/share/maven
 ENV PATH $M2_HOME/bin:$PATH
@@ -12,21 +12,20 @@ WORKDIR /app
 # Copiar todos los archivos del proyecto al contenedor
 COPY . .
 
-# Verificar la existencia del archivo mvnw
+# Verificar la existencia del archivo mvnw (para asegurarnos de que está ahí)
 RUN ls -l ./mvnw
 
 # Cambiar permisos de ejecución al archivo mvnw
 RUN chmod +x ./mvnw
 
-# Limpiar la caché de Maven
+# Limpiar la caché de Maven (si es necesario)
 RUN rm -rf ~/.m2/repository/*
 
 # Ejecutar Maven para compilar el proyecto
-RUN ./mvnw clean install
+RUN mvn clean install  # Usar Maven directamente en lugar de mvnw
 
 # Usar una imagen base de OpenJDK para ejecutar la aplicación
 FROM openjdk:11-jre-slim
-
 
 # Copiar el archivo .jar generado desde el contenedor builder
 COPY --from=builder /app/target/backend-sistem-0.0.1-SNAPSHOT.jar /app/backend-sistem-0.0.1-SNAPSHOT.jar
