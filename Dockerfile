@@ -12,20 +12,22 @@ WORKDIR /app
 # Copiar todos los archivos del proyecto al contenedor
 COPY . .
 
-# Verificar permisos y existencia de mvnw
+# Verificar la existencia del archivo mvnw
 RUN ls -l ./mvnw
-
-# Limpiar la caché de Maven
-RUN rm -rf /root/.m2/repository/*
 
 # Cambiar permisos de ejecución al archivo mvnw
 RUN chmod +x ./mvnw
 
+# Limpiar la caché de Maven
+RUN rm -rf ~/.m2/repository/*
+
 # Ejecutar Maven para compilar el proyecto
-RUN ./mvnw clean install  # o usa "RUN mvn clean install" si prefieres usar Maven directamente
+RUN ./mvnw clean install
 
 # Usar una imagen base de OpenJDK para ejecutar la aplicación
 FROM openjdk:11-jre-slim
+
+
 # Copiar el archivo .jar generado desde el contenedor builder
 COPY --from=builder /app/target/backend-sistem-0.0.1-SNAPSHOT.jar /app/backend-sistem-0.0.1-SNAPSHOT.jar
 
