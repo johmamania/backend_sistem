@@ -9,7 +9,6 @@ COPY . .
 # Cambiar permisos de ejecución al archivo mvnw
 RUN chmod +x ./mvnw
 
-
 # Ejecutar Maven para compilar el proyecto
 RUN ./mvnw clean install
 
@@ -17,7 +16,7 @@ RUN ./mvnw clean install
 FROM openjdk:11-jre-slim
 
 # Copiar el archivo .jar generado desde el contenedor builder
-COPY --from=builder /app/target/backend-sistem-0.0.1-SNAPSHOT.war /app/backend-sistem-0.0.1-SNAPSHOT.war
+COPY --from=builder /app/target/backend-sistem-0.0.1-SNAPSHOT.jar /app/backend-sistem-0.0.1-SNAPSHOT.jar
 
 # Comando para ejecutar la aplicación Java
-CMD ["java", "-war", "/app/backend-sistem-0.0.1-SNAPSHOT.war"]
+CMD ["java", "-jar", "/app/backend-sistem-0.0.1-SNAPSHOT.jar"]
