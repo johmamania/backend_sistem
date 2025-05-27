@@ -11,7 +11,7 @@ COPY . .
 RUN ./mvnw clean install
 
 # Usar una imagen base de OpenJDK para ejecutar la aplicación
-FROM openjdk:17-jre-slim
+FROM openjdk:11-jre-slim
 
 # Copiar el archivo .jar generado desde el contenedor builder
 COPY --from=builder /app/target/backend-sistem-0.0.1-SNAPSHOT.war /app/backend-sistem-0.0.1-SNAPSHOT.war
