@@ -27,7 +27,8 @@ public class CORS implements Filter {
 
            //  ruta del front-end que consumira el servicio
        response.setHeader("Access-Control-Allow-Origin", "*");  //desarrollo localhost
-        ///response.setHeader("Access-Control-Allow-Origin", "https://net.ejercito.mil.pe/sistem");  //servidor
+        //response.setHeader("Access-Control-Allow-Origin", "https://net.ejercito.mil.pe/sistem");  //servidor
+       // response.setHeader("Access-Control-Allow-Origin", "https://front-sistem.onrender.com");  //servidor
         response.setHeader("Access-Control-Allow-Methods", "DELETE, GET, OPTIONS, PATCH, POST, PUT");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN");
