@@ -11,7 +11,7 @@
 	<groupId>com.backend-sistem</groupId>
 	<artifactId>backend-sistem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>backend-sistem</name>
 	<description>backend-sistem</description>
 	<url/>
