@@ -24,8 +24,8 @@ RUN rm -rf ~/.m2/repository/*
 # Ejecutar Maven para compilar el proyecto
 RUN mvn clean install  # Usar Maven directamente en lugar de mvnw
 
-# Usar una imagen base de OpenJDK 17 para ejecutar la aplicación
-FROM openjdk:17-jre-slim
+# Usar una imagen base de OpenJDK 17
+FROM openjdk:17-slim
 
 # Copiar el archivo .jar generado desde el contenedor builder
 COPY --from=builder /app/target/backend-sistem-0.0.1-SNAPSHOT.jar /app/backend-sistem-0.0.1-SNAPSHOT.jar
