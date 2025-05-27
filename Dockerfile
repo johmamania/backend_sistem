@@ -1,5 +1,5 @@
-# Usar una imagen base de Maven más reciente
-FROM maven:3.8.3-jdk-11-slim as builder
+# Usar una imagen base de Maven con JDK 17 para compilar el proyecto
+FROM maven:3.8.3-openjdk-17-slim as builder
 
 # Establecer las variables de entorno para Maven
 ENV MAVEN_HOME /usr/share/maven
@@ -24,8 +24,8 @@ RUN rm -rf ~/.m2/repository/*
 # Ejecutar Maven para compilar el proyecto
 RUN mvn clean install  # Usar Maven directamente en lugar de mvnw
 
-# Usar una imagen base de OpenJDK para ejecutar la aplicación
-FROM openjdk:11-jre-slim
+# Usar una imagen base de OpenJDK 17 para ejecutar la aplicación
+FROM openjdk:17-jre-slim
 
 # Copiar el archivo .jar generado desde el contenedor builder
 COPY --from=builder /app/target/backend-sistem-0.0.1-SNAPSHOT.jar /app/backend-sistem-0.0.1-SNAPSHOT.jar
